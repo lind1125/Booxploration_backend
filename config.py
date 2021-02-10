@@ -1,0 +1,1 @@
+SECRET_KEY = 'SuchaC00000lguy'
