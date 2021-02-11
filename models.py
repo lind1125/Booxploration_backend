@@ -1,10 +1,8 @@
 from peewee import *
 from flask_login import UserMixin
 
-import datetime
-
 # establish connection with the PostGresql Database
-DATABASE = PostgresqlDatabase('dogs_app', host='localhost', port=5432)
+DATABASE = PostgresqlDatabase('bookfinder_app', host='localhost', port=5432)
 
 #refactored to be an inherited class for our models
 class BaseModel(Model):
@@ -17,20 +15,18 @@ class Person(UserMixin, BaseModel):
   email = CharField(unique=True)
   password = CharField()
 
-
-# creating a Dog model. Model is an inherited parent Class from peewee
+# Model is an inherited parent Class from peewee
 class FavedBook(BaseModel):
   person = ForeignKeyField(Person, backref='person')
   title = CharField()
   cover_url = CharField()
   apiKey = CharField()
   has_read = BooleanField()
-  created_at = DateTimeField(default=datetime.datetime.now)
 
 
 # establish connection with the tables. If no tables exist, it will create them. safe=True guarantees that existing tables will not be overwritten.
 def initialize():
   DATABASE.connect()
-  DATABASE.create_tables([Dog, Person, PersonDog], safe=True)
+  DATABASE.create_tables([FavedBook, Person], safe=True)
   print("TABLES Created")
   DATABASE.close()

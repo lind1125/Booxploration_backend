@@ -7,7 +7,7 @@ from flask_login import LoginManager
 # from resources.persons import persons
 
 # importing models.py
-# import models
+import models
 
 # Initialize an instance of flask
 app = Flask(__name__)
@@ -58,17 +58,6 @@ def index():
   return 'hi, there HEY!!!!' 
   
 # Return is used for response. Equivalent to res.whatever. Cannot return ints or lists.
-# Use jsonify to pass all data types within a json object.
-# @app.route('/sayhello/<name>')
-# def say_hello(name):
-#   # how to get query string from the browser
-#   band = request.args.get('bandname')
-
-#   return jsonify(
-#     msg='Hello, {}!'.format(name),
-#     bandname=band, 
-#     status=200, 
-#     list=['Bob', 'Rick', 'Jennifer'])
 
 @app.route('/sayhi/<username>') # When someone goes here...
 def hello(username): # Do this.
@@ -79,5 +68,5 @@ def hello(username): # Do this.
 
 # Listener route
 if __name__ == '__main__':
-  # models.initialize()
+  models.initialize()
   app.run(port=8000, debug=True)
