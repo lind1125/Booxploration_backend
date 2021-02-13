@@ -5,6 +5,7 @@ from flask_login import UserMixin
 DATABASE = PostgresqlDatabase('bookfinder_app', host='localhost', port=5432)
 
 #refactored to be an inherited class for our models
+# Model is an inherited parent Class from peewee
 class BaseModel(Model):
 # Linking the model to the database with class Meta
   class Meta:
@@ -15,7 +16,6 @@ class Person(UserMixin, BaseModel):
   email = CharField(unique=True)
   password = CharField()
 
-# Model is an inherited parent Class from peewee
 class FavedBook(BaseModel):
   person = ForeignKeyField(Person, backref='person')
   title = CharField()
@@ -23,6 +23,11 @@ class FavedBook(BaseModel):
   apiKey = CharField()
   has_read = BooleanField()
 
+
+# class Comment(BaseModel):
+  # person = ForeignKeyField(Person, backref='person')
+  # content = CharField()? >> see if there is a larger "text" equivlent for PSQL
+  # date created (look at dog_app)
 
 # establish connection with the tables. If no tables exist, it will create them. safe=True guarantees that existing tables will not be overwritten.
 def initialize():
