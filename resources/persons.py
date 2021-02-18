@@ -47,6 +47,8 @@ def login():
     if(check_password_hash(person_dict['password'], payload['password'])):
       del person_dict['password']
       login_user(person)
+      # login_user(person=person, remember=True) may be necessary for front end session issues
+      # session['logged_in']=True may be necessary for front end session
       return jsonify(data=person_dict, status={"code": 200, "message": "Success"})
     else:
       return jsonify(data={}, status={"code": 401, "message": "Username or password is incorrect"})

@@ -15,7 +15,11 @@ faves = Blueprint('faves', 'faves')
 
 # route to delete books from faves list
 @faves.route('/faves/<book_id>', methods=['DELETE'])
-
+@login_required
+def delete_fave(book_id):
+  fave_to_delete = models.FavedBook.get_by_id(book_id)
+  fave_to_delete.delete_instance()
+  return jsonify(data={}, status={"code": 201, "message": "Successfully deleted"})
 
 @faves.route('/add', methods=["POST"])
 @login_required
