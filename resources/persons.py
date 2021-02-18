@@ -8,6 +8,12 @@ from flask_login import login_user, logout_user, current_user, login_required
 
 persons = Blueprint('persons', 'persons')
 
+@persons.route('/profile', methods=['GET'])
+def get_profile():
+  user = model_to_dict(current_user)
+  return jsonify(data=user, status={"code": 200, "message": "Success"})
+
+
 @persons.route('/register', methods=['POST'])
 def register():
 
