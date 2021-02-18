@@ -22,6 +22,7 @@ class FavedBook(BaseModel):
   cover_url = CharField()
   apiKey = CharField()
   has_read = BooleanField()
+  recommended = BooleanField()
 
 
 # establish connection with the tables. If no tables exist, it will create them. safe=True guarantees that existing tables will not be overwritten.
