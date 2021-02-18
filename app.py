@@ -5,6 +5,7 @@ from flask_login import LoginManager
 
 # importing resources from their respective .py files
 from resources.persons import persons
+from resources.favedbooks import faves
 
 # importing models.py
 import models
@@ -46,22 +47,7 @@ CORS(app,\
 
 # equivalent to app.use(persons, '/api/v1/persons') in express
 app.register_blueprint(persons, url_prefix='/api/v1/persons')
-
-
-
-
-
-# assumes a GET route if not specified, e.g. @app.route('/', methods=['PUT'])
-# home route equivalent
-@app.route('/')
-def index():
-  return 'hi, there HEY!!!!' 
-  
-# Return is used for response. Equivalent to res.whatever. Cannot return ints or lists.
-
-@app.route('/sayhi/<username>') # When someone goes here...
-def hello(username): # Do this.
-    return "Hello {}".format(username)
+app.register_blueprint(faves, url_prefix='/api/v1/books')
 
 
 

@@ -3,7 +3,7 @@ import models
 from flask import Blueprint, jsonify, request
 from playhouse.shortcuts import model_to_dict
 from flask_bcrypt import generate_password_hash, check_password_hash
-from flask_login import login_user, logout_user, current_user
+from flask_login import login_user, logout_user, current_user, login_required
 
 
 persons = Blueprint('persons', 'persons')
@@ -41,7 +41,6 @@ def login():
     person = models.Person.get(models.Person.email == payload['email'])
     print('!!!!!!!!!!!!!!!!!!!!!!!!!!!')
     print(person)
-
     person_dict = model_to_dict(person)
 
     # check_password_hash(hashed_pw_from_db, unhashed_pw_from_payload)
@@ -55,6 +54,9 @@ def login():
     return jsonify(data={}, status={"code": 401, "message": "Username or password is incorrect"})
 
 @persons.route('/logout', methods=["GET", "POST"])
+@login_required
 def logout():
     logout_user()
     return jsonify(data={}, status={"code": 200, "message": "Logout Successful"})
+
+

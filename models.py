@@ -24,11 +24,6 @@ class FavedBook(BaseModel):
   has_read = BooleanField()
 
 
-# class Comment(BaseModel):
-  # person = ForeignKeyField(Person, backref='person')
-  # content = CharField()? >> see if there is a larger "text" equivlent for PSQL
-  # date created (look at dog_app)
-
 # establish connection with the tables. If no tables exist, it will create them. safe=True guarantees that existing tables will not be overwritten.
 def initialize():
   DATABASE.connect()
