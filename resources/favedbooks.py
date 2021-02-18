@@ -44,3 +44,15 @@ def create_fave():
       fave_dict = model_to_dict(fave)
 
       return jsonify(data=fave_dict, status={"code": 201, "message": "Success"})
+
+@faves.route('/faves/<book_id>', methods=["PUT"])
+@login_required
+def update_fave(book_id):
+  try:
+    payload = request.get_json()
+    query = models.FavedBook.update(**payload).where(models.FavedBook.id==book_id)
+    query.execute()
+    update_fave = model_to_dict(models.FavedBook.get_by_id(book_id))
+    return jsonify(data=update_fave, status={"code": 200, "message": "Successfully updated"})
+  except models.DoesNotExist:
+    return jsonify(data={}, status={"code": 404, "message": "Error getting the resources"})
