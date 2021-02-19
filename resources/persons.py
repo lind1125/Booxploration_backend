@@ -14,10 +14,12 @@ def get_profile():
   return jsonify(data=user, status={"code": 200, "message": "Success"})
 
 
-@persons.route('/register', methods=['POST'])
+@persons.route('/register', methods=['GET', 'POST'])
 def register():
 
-  payload = request.get_json()
+  payload = request.get_json()['formData']
+  print('!!!!!!!!!!!!!!!!!!!')
+  print(payload)
   payload['email'].lower()
 
   try:
