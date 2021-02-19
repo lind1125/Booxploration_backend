@@ -9,8 +9,12 @@ from flask_login import login_user, logout_user, current_user, login_required
 persons = Blueprint('persons', 'persons')
 
 @persons.route('/profile', methods=['GET'])
+@login_required
 def get_profile():
+  print(current_user)
   user = model_to_dict(current_user)
+  print('!!!!!!!!!!!!!!!!!!!!')
+  print(user)
   return jsonify(data=user, status={"code": 200, "message": "Success"})
 
 
@@ -41,7 +45,7 @@ def register():
 
 @persons.route('/login', methods=['POST'])
 def login():
-  payload = request.get_json()
+  payload = request.get_json()['formData']
   payload['email'].lower()
 
   try:
@@ -54,17 +58,17 @@ def login():
     # check_password_hash(hashed_pw_from_db, unhashed_pw_from_payload)
     if(check_password_hash(person_dict['password'], payload['password'])):
       del person_dict['password']
-      login_user(person)
-      # login_user(person=person, remember=True) may be necessary for front end session issues
-      # session['logged_in']=True may be necessary for front end session
+      login_user(person, remember=True)
+      # login_user(person=person, remember=True) # may be necessary for front end session issues
+      # session['logged_in']=True #may be necessary for front end session
       return jsonify(data=person_dict, status={"code": 200, "message": "Success"})
     else:
-      return jsonify(data={}, status={"code": 401, "message": "Username or password is incorrect"})
+      return jsonify(data={}, status={"code": 401, "message": "Email or password is incorrect"})
   except models.DoesNotExist:
-    return jsonify(data={}, status={"code": 401, "message": "Username or password is incorrect"})
+    return jsonify(data={}, status={"code": 401, "message": "Email or password is incorrect"})
 
 @persons.route('/logout', methods=["GET", "POST"])
-@login_required
+# @login_required
 def logout():
     logout_user()
     return jsonify(data={}, status={"code": 200, "message": "Logout Successful"})
