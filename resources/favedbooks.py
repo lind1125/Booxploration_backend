@@ -48,7 +48,7 @@ def create_fave():
 @login_required
 def update_fave(book_id):
   try:
-    payload = request.get_json()
+    payload = request.get_json()['data']
     query = models.FavedBook.update(**payload).where(models.FavedBook.id==book_id)
     query.execute()
     update_fave = model_to_dict(models.FavedBook.get_by_id(book_id))
