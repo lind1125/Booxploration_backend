@@ -1,5 +1,34 @@
 # Project_4
 
+## Booxploration
+
+[**Link to Frontend Repo**](https://github.com/lind1125/project_4_frontend)
+
+[**Deployed API**]()
+
+---
+
+### Technologies used:
+
+  * Python
+  * PostgreSQL
+  * Peewee
+  * Flask
+  * flask-login
+  * CORS
+
+---
+
+### General Approach
+
+
+---
+
+### Installation instructions:
+
+
+---
+
 ### ERD (tentative)
 
 https://lucid.app/lucidchart/invitations/accept/51e56d3e-d9a3-420e-a28d-4cc64767ac29
