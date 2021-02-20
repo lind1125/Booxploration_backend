@@ -1,6 +1,6 @@
 import models 
 
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, session
 from playhouse.shortcuts import model_to_dict
 from flask_bcrypt import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, current_user, login_required
@@ -59,8 +59,9 @@ def login():
     if(check_password_hash(person_dict['password'], payload['password'])):
       del person_dict['password']
       login_user(person, remember=True)
-      # login_user(person=person, remember=True) # may be necessary for front end session issues
-      # session['logged_in']=True #may be necessary for front end session
+      # session['logged_in'] = True
+      # session['person_id'] = person.id
+      print('current user:', current_user)
       return jsonify(data=person_dict, status={"code": 200, "message": "Success"})
     else:
       return jsonify(data={}, status={"code": 401, "message": "Email or password is incorrect"})
@@ -70,7 +71,12 @@ def login():
 @persons.route('/logout', methods=["GET", "POST"])
 # @login_required
 def logout():
+    print('logging out!!!!!!!!!')
+    print(current_user)
+    # session['logged_in'] = False
+    # session.pop('person_id', None)
     logout_user()
+    print(current_user)
     return jsonify(data={}, status={"code": 200, "message": "Logout Successful"})
 
 
