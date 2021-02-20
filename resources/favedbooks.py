@@ -23,7 +23,7 @@ def get_faved_books():
                        status={"code": 401, "message": "Log in or sign up to view your faved books"})
 
 # route to delete books from faves list
-@faves.route('/faves/<book_id>', methods=['DELETE'])
+@faves.route('/faves/<book_id>', methods=['GET', 'DELETE'])
 @login_required
 def delete_fave(book_id):
   fave_to_delete = models.FavedBook.get_by_id(book_id)
@@ -31,19 +31,18 @@ def delete_fave(book_id):
   return jsonify(data={}, status={"code": 201, "message": "Successfully deleted"})
 
 # route to add books to faves list
-# @faves.route('/faves/<book_id>', methods=['POST']) ultimately will be the urlpath
 @faves.route('/addfave', methods=["POST"])
 @login_required
 def create_fave():
    # create the fave w/ payload info if current_user exists
     # if current_user.id:
-      payload = request.get_json()
+      payload = request.get_json()['listData']
       print('!!!!!!!!!!!!!!!!!!!')
       print(payload)
       fave = models.FavedBook.create(person=current_user.id, **payload)
       fave_dict = model_to_dict(fave)
 
-      return jsonify(data=fave_dict, status={"code": 201, "message": "Success"})
+      return jsonify(data=fave_dict, status={"code": 201, "message": "Successfully added book"})
 
 @faves.route('/faves/<book_id>', methods=["PUT"])
 @login_required
