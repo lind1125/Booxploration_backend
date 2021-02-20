@@ -1,8 +1,11 @@
+import os
 from peewee import *
 from flask_login import UserMixin
 
-# establish connection with the PostGresql Database
-DATABASE = PostgresqlDatabase('bookfinder_app', host='localhost', port=5432)
+from playhouse.db_url import connect
+
+# establish connection with Heroku
+DATABASE = connect(os.environ.get('DATABASE_URL'))
 
 #refactored to be an inherited class for our models
 # Model is an inherited parent Class from peewee

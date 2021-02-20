@@ -1,3 +1,4 @@
+import os
 # import Flask
 from flask import Flask, g, jsonify, request
 from flask_cors import CORS
@@ -42,6 +43,7 @@ def after_request(response):
 
 # '\' allows you to break a line in your code and have Python ignore the line break
 CORS(app,\
+     # need to add react front end deployment url 
      origins=['http://localhost:3000'],\
      supports_credentials=True)
 
@@ -50,7 +52,9 @@ app.register_blueprint(persons, url_prefix='/api/v1/persons')
 app.register_blueprint(faves, url_prefix='/api/v1/books')
 
 
-
+if 'ON_HEROKU' in os.environ:
+    print('hitting ')
+    models.initialize()
 
 # Listener route
 if __name__ == '__main__':
