@@ -68,7 +68,7 @@ def login():
   except models.DoesNotExist:
     return jsonify(data={}, status={"code": 401, "message": "Email or password is incorrect"})
 
-@persons.route('/logout', methods=["GET", "POST"])
+@persons.route('/logout', methods=['GET', 'POST'])
 # @login_required
 def logout():
     print('logging out!!!!!!!!!')
