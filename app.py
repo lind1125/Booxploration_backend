@@ -44,7 +44,7 @@ def after_request(response):
 # '\' allows you to break a line in your code and have Python ignore the line break
 CORS(app,\
      # need to add react front end deployment url 
-     origins=['http://localhost:3000'],\
+     origins=['http://localhost:3000', 'https://booxploration.herokuapp.com'],\
      supports_credentials=True)
 
 # equivalent to app.use(persons, '/api/v1/persons') in express
