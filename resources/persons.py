@@ -1,6 +1,6 @@
 import models 
 
-from flask import Blueprint, jsonify, request, session
+from flask import Blueprint, jsonify, request, session, cookie 
 from playhouse.shortcuts import model_to_dict
 from flask_bcrypt import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, current_user, login_required
@@ -14,8 +14,10 @@ def get_profile():
   print(current_user)
   print(request)
   user = model_to_dict(current_user)
-  print('!!!!!!!!!!!!!!!!!!!!')
+  print('PROFILE!!!!!!!!!!!!!!!!!!!!')
   print(user)
+  print('session:', session)
+  print('cookie', cookie)
   return jsonify(data=user, status={"code": 200, "message": "Success"})
 
 
@@ -59,10 +61,12 @@ def login():
     # check_password_hash(hashed_pw_from_db, unhashed_pw_from_payload)
     if(check_password_hash(person_dict['password'], payload['password'])):
       del person_dict['password']
-      login_user(person, remember=True)
+      login_user(person)
       # session['logged_in'] = True
       # session['person_id'] = person.id
       print('current user:', current_user)
+      print('session:', session)
+      print('cookie', cookie)
       return jsonify(data=person_dict, status={"code": 200, "message": "Success"})
     else:
       return jsonify(data={}, status={"code": 401, "message": "Email or password is incorrect"})
@@ -73,11 +77,13 @@ def login():
 # @login_required
 def logout():
     print('logging out!!!!!!!!!')
-    print(current_user)
+    session.clear()
+    print('session:', session)
     # session['logged_in'] = False
     # session.pop('person_id', None)
     logout_user()
     print(current_user)
+    print('cookie', cookie)
     return jsonify(data={}, status={"code": 200, "message": "Logout Successful"})
 
 
