@@ -16,6 +16,7 @@ def get_profile():
   print('PROFILE!!!!!!!!!!!!!!!!!!!!')
   print(user)
   print('session:', session)
+  print('request cookie,' request.cookie)
   return jsonify(data=user, status={"code": 200, "message": "Success"})
 
 
@@ -64,6 +65,7 @@ def login():
       # session['person_id'] = person.id
       print('current user:', current_user)
       print('session:', session)
+      print('request cookie', request.cookie)
       return jsonify(data=person_dict, status={"code": 200, "message": "Success"})
     else:
       return jsonify(data={}, status={"code": 401, "message": "Email or password is incorrect"})
@@ -80,6 +82,7 @@ def logout():
     # session.pop('person_id', None)
     logout_user()
     print(current_user)
+    print('request cookie', request.cookie)
     return jsonify(data={}, status={"code": 200, "message": "Logout Successful"})
 
 
