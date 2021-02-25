@@ -13,8 +13,9 @@ persons = Blueprint('persons', 'persons')
 def get_profile():
   print(current_user)
   user = model_to_dict(current_user)
-  print('!!!!!!!!!!!!!!!!!!!!')
+  print('PROFILE!!!!!!!!!!!!!!!!!!!!')
   print(user)
+  print('session:', session)
   return jsonify(data=user, status={"code": 200, "message": "Success"})
 
 
@@ -79,6 +80,7 @@ def logout():
     # session.pop('person_id', None)
     logout_user()
     print(current_user)
+    print(user)
     return jsonify(data={}, status={"code": 200, "message": "Logout Successful"})
 
 
