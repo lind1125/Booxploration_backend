@@ -16,7 +16,7 @@ def get_profile():
   print('PROFILE!!!!!!!!!!!!!!!!!!!!')
   print(user)
   print('session:', session)
-  print('request cookie,' request.cookie)
+  print('request cookie', request.cookie)
   return jsonify(data=user, status={"code": 200, "message": "Success"})
 
 
