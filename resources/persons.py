@@ -12,6 +12,7 @@ persons = Blueprint('persons', 'persons')
 @login_required
 def get_profile():
   print(current_user)
+  print(request)
   user = model_to_dict(current_user)
   print('!!!!!!!!!!!!!!!!!!!!')
   print(user)
