@@ -76,7 +76,7 @@ def logout():
     # session['logged_in'] = False
     # session.pop('person_id', None)
     logout_user()
-    Response.delete_cookie(session)
+    Response.set_cookie('session', max_age=0)
     print(current_user)
     return jsonify(data={}, status={"code": 200, "message": "Logout Successful"})
 
