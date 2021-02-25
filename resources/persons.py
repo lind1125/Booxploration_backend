@@ -1,6 +1,6 @@
 import models 
 
-from flask import Blueprint, jsonify, request, Response, session 
+from flask import Blueprint, jsonify, request, session 
 from playhouse.shortcuts import model_to_dict
 from flask_bcrypt import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, current_user, login_required
@@ -73,10 +73,10 @@ def login():
 def logout():
     print('logging out!!!!!!!!!')
     print(current_user)
+    session.clear()
     # session['logged_in'] = False
     # session.pop('person_id', None)
     logout_user()
-    Response.set_cookie('session', max_age=0)
     print(current_user)
     return jsonify(data={}, status={"code": 200, "message": "Logout Successful"})
 
