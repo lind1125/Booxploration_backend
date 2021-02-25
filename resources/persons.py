@@ -58,7 +58,7 @@ def login():
     # check_password_hash(hashed_pw_from_db, unhashed_pw_from_payload)
     if(check_password_hash(person_dict['password'], payload['password'])):
       del person_dict['password']
-      login_user(person, remember=True)
+      login_user(person)
       # session['logged_in'] = True
       # session['person_id'] = person.id
       print('current user:', current_user)
@@ -73,7 +73,7 @@ def login():
 def logout():
     print('logging out!!!!!!!!!')
     print(current_user)
-    session.clear()
+    # session.clear()
     # session['logged_in'] = False
     # session.pop('person_id', None)
     logout_user()
