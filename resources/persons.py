@@ -57,7 +57,7 @@ def login():
       del person_dict['password']
       login_user(person)
       # session['logged_in'] = True
-      session['person_id'] = person.id
+      # session['person_id'] = person.id
       print('current user:', current_user)
       print('session:', session)
       return jsonify(data=person_dict, status={"code": 200, "message": "Success"})
@@ -67,13 +67,13 @@ def login():
     return jsonify(data={}, status={"code": 401, "message": "Email or password is incorrect"})
 
 @persons.route('/logout', methods=['GET', 'POST'])
-# @login_required
+@login_required
 def logout():
     print('logging out!!!!!!!!!')
-    session.clear()
-    print('session:', session)
+    # session.clear()
+    # print('session:', session)
     # session['logged_in'] = False
-    session.pop('person_id', None)
+    # session.pop('person_id', None)
     logout_user()
     print(current_user)
     return jsonify(data={}, status={"code": 200, "message": "Logout Successful"})
