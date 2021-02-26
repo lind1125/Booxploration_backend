@@ -12,12 +12,11 @@ persons = Blueprint('persons', 'persons')
 @login_required
 def get_profile():
   print(current_user)
-  print(request)
+  print('request', request)
   user = model_to_dict(current_user)
   print('PROFILE!!!!!!!!!!!!!!!!!!!!')
   print(user)
   print('session:', session)
-  print('cookie', cookie)
   return jsonify(data=user, status={"code": 200, "message": "Success"})
 
 
