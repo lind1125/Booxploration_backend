@@ -78,6 +78,7 @@ def logout():
     # session.pop('person_id', None)
     logout_user()
     print(current_user)
-    return jsonify(data={}, status={"code": 200, "message": "Logout Successful"})
+    return resp
+  # jsonify(data={}, status={"code": 200, "message": "Logout Successful"})
 
 
