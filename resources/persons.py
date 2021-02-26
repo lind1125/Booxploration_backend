@@ -11,12 +11,7 @@ persons = Blueprint('persons', 'persons')
 @persons.route('/profile', methods=['GET'])
 @login_required
 def get_profile():
-  print(current_user)
-  print('request', request)
   user = model_to_dict(current_user)
-  print('PROFILE!!!!!!!!!!!!!!!!!!!!')
-  print(user)
-  print('session:', session)
   return jsonify(data=user, status={"code": 200, "message": "Success"})
 
 
@@ -62,7 +57,7 @@ def login():
       del person_dict['password']
       login_user(person)
       # session['logged_in'] = True
-      # session['person_id'] = person.id
+      session['person_id'] = person.id
       print('current user:', current_user)
       print('session:', session)
       return jsonify(data=person_dict, status={"code": 200, "message": "Success"})
@@ -78,7 +73,7 @@ def logout():
     session.clear()
     print('session:', session)
     # session['logged_in'] = False
-    # session.pop('person_id', None)
+    session.pop('person_id', None)
     logout_user()
     print(current_user)
     return jsonify(data={}, status={"code": 200, "message": "Logout Successful"})
