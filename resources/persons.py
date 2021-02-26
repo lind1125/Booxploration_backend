@@ -72,7 +72,7 @@ def logout():
     cookie = request.cookies.get('session')
     print(cookie)
     resp = make_response()
-    resp.set_cookie('session', value=cookie, domain='booxploration-api-heroku.herokuapp.com', path='/', expires=0)
+    resp.set_cookie('session', value=cookie, domain='booxploration-api-heroku.herokuapp.com', path='/', expires=0, SameSite=None)
     print('logging out!!!!!!!!!')
     # session.clear()
     # print('session:', session)
