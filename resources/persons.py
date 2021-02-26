@@ -70,7 +70,7 @@ def login():
 @login_required
 def logout():
     resp = make_response()
-    resp.set_cookie(session, expires=0)
+    resp.set_cookie('session', expires=0)
     print('logging out!!!!!!!!!')
     # session.clear()
     # print('session:', session)
@@ -78,7 +78,6 @@ def logout():
     # session.pop('person_id', None)
     logout_user()
     print(current_user)
-    return resp
-  # jsonify(data={}, status={"code": 200, "message": "Logout Successful"})
+    return  jsonify(data={resp}, status={"code": 200, "message": "Logout Successful"})
 
 
