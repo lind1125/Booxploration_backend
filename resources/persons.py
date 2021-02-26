@@ -1,6 +1,6 @@
 import models 
 
-from flask import Blueprint, jsonify, request, session 
+from flask import Blueprint, jsonify, request, session, make_response
 from playhouse.shortcuts import model_to_dict
 from flask_bcrypt import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, current_user, login_required
@@ -69,6 +69,8 @@ def login():
 @persons.route('/logout', methods=['GET', 'POST'])
 @login_required
 def logout():
+    resp = make_response()
+    resp.set_cookie('session', expires=0)
     print('logging out!!!!!!!!!')
     # session.clear()
     # print('session:', session)
