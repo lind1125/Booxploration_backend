@@ -70,7 +70,7 @@ def login():
 @login_required
 def logout():
     resp = make_response()
-    resp.set_cookie('session', domain='herokuapp.com', path='/', expires=0)
+    resp.set_cookie('session', domain='booxploration-api-heroku.herokuapp.com', path='/', expires=0)
     print('logging out!!!!!!!!!')
     # session.clear()
     # print('session:', session)
