@@ -30,6 +30,7 @@ def load_person(person_id):
 
 @app.before_request
 def before_request():
+  app.config.update(SESSION_COOKIE_SAMESITE="None", SESSION_COOKIE_SECURE=True)
   '''Connect to the database before each request.'''
   g.db = models.DATABASE #ALL CAPS INDICATE TO OTHER READERS OF THE CODE THAT A VARIABLE NAME SHOULD NOT BE CHANGED
   g.db.connect()
