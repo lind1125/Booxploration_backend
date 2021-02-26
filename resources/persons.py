@@ -69,7 +69,8 @@ def login():
 @persons.route('/logout', methods=['GET', 'POST'])
 @login_required
 def logout():
-    print(request.cookies)
+    cookie = request.cookies.get('session')
+    print(cookie)
     resp = make_response()
     resp.set_cookie('session', domain='booxploration-api-heroku.herokuapp.com', path='/', expires=0)
     print('logging out!!!!!!!!!')
