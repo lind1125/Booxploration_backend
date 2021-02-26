@@ -36,7 +36,7 @@ def before_request():
 
 @app.after_request
 def after_request(response):
-      app.config.update(SESSION_COOKIE_SAMESITE="None", SESSION_COOKIE_SECURE=True)
+    app.config.update(SESSION_COOKIE_SAMESITE="None", SESSION_COOKIE_SECURE=True)
     '''Close the database connection after each request.'''
     g.db = models.DATABASE
     g.db.close()
