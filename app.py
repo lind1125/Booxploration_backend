@@ -30,16 +30,19 @@ def load_person(person_id):
 
 @app.before_request
 def before_request():
+  app.config.update(SESSION_COOKIE_SAMESITE="None", SESSION_COOKIE_SECURE=True)
   '''Connect to the database before each request.'''
   g.db = models.DATABASE #ALL CAPS INDICATE TO OTHER READERS OF THE CODE THAT A VARIABLE NAME SHOULD NOT BE CHANGED
   g.db.connect()
 
 @app.after_request
 def after_request(response):
-    '''Close the database connection after each request.'''
-    g.db = models.DATABASE
-    g.db.close()
-    return response
+  app.config.update(SESSION_COOKIE_SAMESITE="None", SESSION_COOKIE_SECURE=True)
+  response.headers.add("Set-Cookie", "my_cookie='a cookie'; Secure; SameSite=None;")
+  '''Close the database connection after each request.'''
+  g.db = models.DATABASE
+  g.db.close()
+  return response
 
 # '\' allows you to break a line in your code and have Python ignore the line break
 CORS(app,\
