@@ -51,17 +51,12 @@ def login():
   try:
     # see if person is registered
     person = models.Person.get(models.Person.email == payload['email'])
-    print('!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-    print(person)
     person_dict = model_to_dict(person)
 
     # check_password_hash(hashed_pw_from_db, unhashed_pw_from_payload)
     if(check_password_hash(person_dict['password'], payload['password'])):
       del person_dict['password']
-      login_user(person, remember=True)
-      # session['logged_in'] = True
-      # session['person_id'] = person.id
-      print('current user:', current_user)
+      login_user(person)
       return jsonify(data=person_dict, status={"code": 200, "message": "Success"})
     else:
       return jsonify(data={}, status={"code": 401, "message": "Email or password is incorrect"})
@@ -71,12 +66,7 @@ def login():
 @persons.route('/logout', methods=['GET', 'POST'])
 # @login_required
 def logout():
-    print('logging out!!!!!!!!!')
-    print(current_user)
-    # session['logged_in'] = False
-    # session.pop('person_id', None)
     logout_user()
-    print(current_user)
     return jsonify(data={}, status={"code": 200, "message": "Logout Successful"})
 
 
