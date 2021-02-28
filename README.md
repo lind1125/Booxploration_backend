@@ -1,6 +1,6 @@
 # Booxploration - back end
 
-[**Deployed API**](https://booxploration-api-heroku.herokuapp.com/)
+[**Deployed App**](https://booxploration.herokuapp.com/)
 
 [**Link to Frontend Repo**](https://github.com/lind1125/project_4_frontend)
 
