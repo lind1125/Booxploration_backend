@@ -11,8 +11,13 @@ persons = Blueprint('persons', 'persons')
 @persons.route('/profile', methods=['GET'])
 @login_required
 def get_profile():
-  user = model_to_dict(current_user)
-  return jsonify(data=user, status={"code": 200, "message": "Success"})
+    try:
+        person = models.Person.get_by_id(current_user.id)
+        person_dict = model_to_dict(person)
+        return jsonify(data=person_dict, status={"code": 200, "message": "Success"})	
+    except models.DoesNotExist:	
+        return jsonify(data={}, \
+                    status={"code": 401, "message": "Log in or sign up to view your profile."})
 
 
 @persons.route('/register', methods=['GET', 'POST'])
@@ -53,7 +58,11 @@ def login():
     # check_password_hash(hashed_pw_from_db, unhashed_pw_from_payload)
     if(check_password_hash(person_dict['password'], payload['password'])):
       del person_dict['password']
+      session.pop('person_id', None)
+      session['logged_in'] = True
+      session['person_id'] = person.id
       login_user(person)
+
       return jsonify(data=person_dict, status={"code": 200, "message": "Success"})
     else:
       return jsonify(data={}, status={"code": 401, "message": "Email or password is incorrect"})
@@ -63,9 +72,12 @@ def login():
 @persons.route('/logout', methods=['GET', 'POST'])
 @login_required
 def logout():
-    logout_user()
-    session.pop()
-    session.clear()
-    return jsonify(data={}, status={"code": 200, "message": "Logout Successful"})
+    try:
+        logout_user()
+        session.pop()
+        session.clear()
+        return jsonify(data={}, status={"code": 200, "message": "Successfully logged out"})
+    except:
+            return jsonify(data={}, status={"code": 401, "message": "No user logged in"})
 
 
