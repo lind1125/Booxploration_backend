@@ -64,7 +64,7 @@ I tested all of my routes using Postman before building out my front end, refact
 
 Understanding how to work with the model relationships as well as auth and session persistence proved to be quite challenging. I ended up reading (and re-reading) sections of the Flask and flask-login docs, as well as running through the first half or so of [Miguel Grinberg's Flask Mega-Tutorial](https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world) to try to get a better handle on what elements of the program were coming from flask, flask-login, and what were native to Python itself.
 
-Much of my understanding (limited as it still is) came from troubleshooting with my peers in the cohort who were also building a back end using Flask.
+Once my local set up was functioning as expected, deployment to Heroku created new issues in getting protected routes to function as intended. Much of my understanding (limited as it still is) came from troubleshooting with my peers in the cohort who were also building a back end using Flask.
 
 ---
 
