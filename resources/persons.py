@@ -64,6 +64,8 @@ def login():
 @login_required
 def logout():
     logout_user()
+    session.pop()
+    session.clear()
     return jsonify(data={}, status={"code": 200, "message": "Logout Successful"})
 
 
