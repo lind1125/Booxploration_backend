@@ -66,6 +66,8 @@ Understanding how to work with the model relationships as well as auth and sessi
 
 Much of my understanding (limited as it still is) came from troubleshooting with my peers in the cohort who were also building a back end using Flask.
 
+---
+
 ### Acknowledgements
 
 * Thank you to the GA team giving me the tools to explore this language/framework
